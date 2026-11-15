@@ -1,0 +1,15 @@
+name: Swift
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: swift test
+      - name: Build application
+        run: sh scripts/build-app.sh release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Jog-con-macOS
+          path: build/Jog-con.app
